@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamPro DSU | Future of Campus Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #7c3aed;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            /* Premium Dark */
+            color: #f8fafc;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 8%;
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.85);
+            /* Dark Glass */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 8% 120px;
+            text-align: center;
+            position: relative;
+            background: url('final_premium_bg.png') center/cover no-repeat;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.95) 100%);
+            z-index: 1;
+        }
+
+        .hero>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-logo i {
+            font-size: 50px;
+            color: var(--primary);
+        }
+
+        /* Features */
+        .features {
+            padding: 120px 8%;
+            background: #0f172a;
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(79, 70, 229, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-item i {
+            font-size: 30px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .feature-item p {
+            color: #94a3b8;
+            font-size: 15px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 8% 40px;
+            background: #111827;
+            color: white;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Toast Styles */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2000;
+        }
+
+        .toast {
+            background: #111827;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            border-left: 4px solid var(--primary);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#" class="logo">
+            <img src="dsu_logo.png" alt="DSU Logo" style="height: 65px; width: auto;">
+            ExamPro <span>DSU</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="login.html" class="btn-login" id="navActionBtn">Login</a>
+    </nav>
+
+    <div class="hero" id="home">
+        <span class="section-tag">Empowering Education</span>
+        <h1>Life at Dayananda Sagar University</h1>
+        <p>A glimpse into our vibrant campus life and innovative academic environment. Discover the future of excellence
+            at DSU.</p>
+
+        <div class="hero-logo" style="background: transparent; box-shadow: none;">
+            <img src="dsu_logo.png" alt="DSU Logo" style="height: 120px; width: auto;">
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="login.html" id="heroGetStarted" class="btn-login" style="padding: 16px 40px; font-size: 16px;">Get Started</a>
+        </div>
+    </div>
+
+    <div class="features" id="features">
+        <div style="text-align: center;">
+            <span class="section-tag">Why Choose Us</span>
+            <h2 style="font-size: 36px; margin-bottom: 15px;">Advanced Learning Ecosystem</h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Our platform combines cutting-edge
+                technology with traditional pedagogy to deliver excellence.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-microchip"></i>
+                <h3>AI Powered</h3>
+                <p>Intelligent monitoring and personalized assessment paths for every student.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-lock"></i>
+                <h3>Secure Portal</h3>
+                <p>Enterprise-grade security to protect your academic records and exam data.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-chart-line"></i>
+                <h3>Real-time Analytics</h3>
+                <p>Deep insights into performance trends and areas needing improvement.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>ExamPro DSU</h2>
+                <p>Leading the way in digital transformation for Dayananda Sagar University. Making learning
+                    accessible, secure, and smart.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="about.html">Our Team</a></li>
+                    <li><a href="#features">Key Features</a></li>
+                    <li><a href="about.html">Academic Dean</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="javascript:void(0)"
+                            onclick="showToast('Help Center is currently under maintenance.')">Help Center</a></li>
+                    <li><a href="javascript:void(0)" onclick="showToast('Terms of Service will be updated soon.')">Terms
+                            of Service</a></li>
+                    <li><a href="javascript:void(0)"
+                            onclick="showToast('Privacy Policy documentation is pending.')">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:loganathan082008@gmail.com">loganathan082008@gmail.com</a></li>
+                    <li><a href="tel:+917010123479">+91 7010123479</a></li>
+                    <li><a href="https://maps.app.goo.gl/dr57MP5eupfdjdxJ7" target="_blank">Dayananda Sagar University,
+                            Hosur Rd, Kudlu Gate,
+                            Srinivasa Nagar, Hal Layout, Singasandra, Bengaluru, Karnataka 560068</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 ExamPro DSU. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDKDT0kvwEm0cEdh_MpbTb8A9W3_xwAVxY",
+            authDomain: "dsu-exam-system.firebaseapp.com",
+            projectId: "dsu-exam-system",
+            storageBucket: "dsu-exam-system.firebasestorage.app",
+            messagingSenderId: "155083834622",
+            appId: "1:155083834622:web:ff0a9780b88bad0b8811af",
+            measurementId: "G-1TPT1BR6GD"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const ADMIN_EMAILS = ["admin@dsu.edu", "loganathan@dsu.edu", "mloganathan082008@gmail.com"];
+
+        onAuthStateChanged(auth, (user) => {
+            // Logic removed per user request: Buttons will always point to login.html
+        });
+
+        window.showToast = function (msg) {
+            const container = document.getElementById('toast-container') || (function () {
+                const div = document.createElement('div');
+                div.id = 'toast-container';
+                div.className = 'toast-container';
+                document.body.appendChild(div);
+                return div;
+            })();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas fa-info-circle"></i> ${msg}`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(20px)';
+                toast.style.transition = '0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        };
+    </script>
+</body>
+
+</html>

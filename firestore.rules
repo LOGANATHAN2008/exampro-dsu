@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===== Admin Check =====
+    function isAdmin() {
+      return request.auth != null &&
+        request.auth.token.email in [
+          'admin@dsu.edu',
+          'loganathan@dsu.edu',
+          'mloganathan082008@gmail.com'
+        ];
+    }
+
+    // ===== Students Collection =====
+    // Students can read/write own profile. Admin can read/write all.
+    match /students/{studentId} {
+      allow read: if request.auth != null && (request.auth.uid == studentId || isAdmin());
+      allow create: if request.auth != null && request.auth.uid == studentId;
+      allow update: if request.auth != null && (request.auth.uid == studentId || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // ===== Tests Collection =====
+    // Only admin can create/update/delete tests.
+    // Authenticated students can read tests (filtering done client-side).
+    match /tests/{testId} {
+      allow read: if request.auth != null;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ===== Results Collection =====
+    // Students can create their own results. Admin can read all.
+    // Students can read only their own results.
+    match /results/{resultId} {
+      allow read: if request.auth != null && (isAdmin() || resource.data.studentId == request.auth.uid);
+      allow create: if request.auth != null && request.resource.data.studentId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    // ===== Malpractice Logs =====
+    // Students can create logs (auto-logged on tab switch).
+    // Only admin can read all logs.
+    match /malpracticeLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if request.auth != null;
+      allow update, delete: if isAdmin();
+    }
+
+    // ===== Courses Collection =====
+    // Authenticated users can read courses. Only admin can manage.
+    match /courses/{courseId} {
+      allow read: if request.auth != null;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ===== Announcements =====
+    match /announcements/{id} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // ===== Deny all other access =====
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
